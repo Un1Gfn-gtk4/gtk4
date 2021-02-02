@@ -10,8 +10,6 @@ CFLAGS+=-std=gnu11 -g -O0 -Wall -Wextra -Wno-unused-parameter -Winline -Wdepreca
 default: hello-world-gtk.out
 	env G_DEBUG=fatal-warnings ./$<
 
-%.out: %.c ; $(CC) $(CFLAGS) $(LDFLAGS) -o $@ $< $(LDLIBS)
-
 # https://wiki.gnome.org/Valgrind
 # https://developer.gnome.org/glib/stable/glib-running.html (G_DEBUG)
 hello-world-gtk.log:
@@ -27,7 +25,8 @@ hello-world-gtk.log:
 	  --leak-resolution=high \
 	  --num-callers=20 \
 	  --log-file=$@ \
-    ./$<
+	./$<
+	subl $@
 
 # https://developer.gnome.org/glib/stable/glib-Version-Information.html
 # https://developer.gnome.org/glib/stable/glib-compiling.html
@@ -40,11 +39,10 @@ $(shell pkg-config --cflags gtk4) \
 -DGDK_PIXBUF_DISABLE_DEPRECATED \
 -DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_66 \
 -DGLIB_VERSION_MAX_ALLOWED=GLIB_VERSION_2_66
-
-# hello-world-gtk.out: LDFLAGS+=-static
 hello-world-gtk.out: LDLIBS+=$(shell pkg-config --libs gtk4)
+%.out: %.c ; $(CC) $(CFLAGS) $(LDFLAGS) -o $@ $< $(LDLIBS)
 
 # cscope & pkg-config -I/xxx
 
 clean:
-	@rm -fv *.o *.out
+	@rm -fv *.o *.out *.log *.h.gch
