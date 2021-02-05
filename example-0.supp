@@ -1,0 +1,52 @@
+{
+  <XextAddDisplay()>
+  Memcheck:Leak
+  match-leak-kinds: definite
+  fun:malloc
+  fun:XextAddDisplay
+  obj:*
+  obj:*
+  fun:epoxy_glx_version
+  obj:/usr/lib/libgtk-4.so.1.0.2
+  obj:/usr/lib/libgtk-4.so.1.0.2
+  obj:/usr/lib/libgtk-4.so.1.0.2
+  fun:gdk_surface_create_gl_context
+  obj:/usr/lib/libgtk-4.so.1.0.2
+  fun:gsk_renderer_realize
+  fun:gsk_renderer_new_for_surface
+  obj:/usr/lib/libgtk-4.so.1.0.2
+  obj:/usr/lib/libgtk-4.so.1.0.2
+  fun:g_signal_emit_valist
+  fun:g_signal_emit
+  fun:gtk_widget_realize
+  obj:/usr/lib/libgtk-4.so.1.0.2
+  fun:g_signal_emit_valist
+  fun:g_signal_emit
+  fun:gtk_widget_show
+  fun:draw
+  fun:activate
+  fun:g_closure_invoke
+  obj:/usr/lib/libgobject-2.0.so.0.6600.4
+  fun:g_signal_emit_valist
+  fun:g_signal_emit
+  obj:/usr/lib/libgio-2.0.so.0.6600.4
+  fun:g_application_run
+  fun:main
+}
+
+{
+  <gtk_init_check()>
+  Memcheck:Leak
+  match-leak-kinds: definite
+  fun:g_type_create_instance
+  obj:/usr/lib/libgobject-2.0.so.0.6600.4
+  fun:g_object_new_with_properties
+  fun:g_object_new
+  obj:/usr/lib/libgtk-4.so.1.0.2
+  obj:/usr/lib/libgtk-4.so.1.0.2
+  obj:/usr/lib/libgtk-4.so.1.0.2
+  fun:gdk_x11_display_open
+  fun:gdk_display_manager_open_display
+  fun:gtk_init_check
+  fun:main
+}
