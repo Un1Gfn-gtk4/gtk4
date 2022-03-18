@@ -1,6 +1,8 @@
 #include <gtk/gtk.h>
 
-#define APPID "com.github.Un1Gfn.gtk4"
+// https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html
+// ... replacing it with an underscore ... cannot cause ambiguity ... underscores are not allowed in DNS domain names
+#define APPID "com.github.Un1Gfn_obj.gtk4"
 
 /*static void clicked(const GtkWidget *const widget,const gconstpointer garbage){
   g_assert(widget&&!garbage);
