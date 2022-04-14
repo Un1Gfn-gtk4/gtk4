@@ -61,6 +61,26 @@ static void button_label_align_fill2start(GtkButton *b){
 
 }
 
+static void key_press_event(GtkWidget* w, GdkEventKey *e, gpointer p){
+  assert(!p);
+  assert(win==w);
+  switch(e->keyval){
+    case GDK_KEY_equal:
+    case GDK_KEY_plus:
+      // g_signal_emit_by_name(bB,"button-press-event",NULL); // no animation
+      g_signal_emit_by_name(GTK_BUTTON(bB),"activate",NULL); // animation
+      break;
+    case GDK_KEY_underscore:
+    case GDK_KEY_minus:
+      // g_signal_emit_by_name(bD,"button-press-event",NULL); // no animation
+      g_signal_emit_by_name(GTK_BUTTON(bD),"activate",NULL); // animation
+      break;
+    default:
+      printf("unknown key [0x%x] '%c'\n", e->keyval, e->keyval);
+      break;
+  }
+}
+
 static void activate(GtkApplication *a, gpointer p){
   
   assert(a);
@@ -85,6 +105,7 @@ static void activate(GtkApplication *a, gpointer p){
 
   // https://stackoverflow.com/questions/34387757/how-do-i-intercept-a-gtk-window-close-button-click
   g_signal_connect(win,"delete-event",G_CALLBACK(closewin),NULL);
+  g_signal_connect(win,"key-press-event",G_CALLBACK(key_press_event),NULL);
 
   GtkWidget *g=gtk_grid_new(); assert(g);
   gtk_container_add(GTK_CONTAINER(win),g);

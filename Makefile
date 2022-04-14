@@ -18,3 +18,6 @@ run: build
 # 	env GTK_DEBUG=interactive $(O)/example-2
 # 	$(O)/backlight_cli
 	$(O)/backlight_gui
+
+gdb: build
+	gdb -ex run $(O)/backlight_gui
